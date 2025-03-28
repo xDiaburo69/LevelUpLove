@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.Customizer;
 
@@ -17,11 +19,16 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // für API-Nutzung ohne Token
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/health").permitAll() // <-- das ist wichtig!
+                        .requestMatchers("/api/health", "/api/auth/register").permitAll() // <-- das ist wichtig!
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults()); // damit du nicht 403 bekommst
 
         return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

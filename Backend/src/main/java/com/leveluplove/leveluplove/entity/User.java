@@ -32,6 +32,9 @@ public class User {
     @Size(min = 3, max = 20)
     private String username; // kann man selbst eintragen
 
+    @NotBlank
+    private String gender; // ist required, wird Dropdown (male/female/other/alien)
+
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt; // wird beim Erstellen vom System angelegt
@@ -57,9 +60,6 @@ class UserProfile {
 
     @Size(min = 3, max = 20)
     private String name; // ist optional, kann man selbst eintragen
-
-    @NotBlank
-    private String gender; // ist required, wird Dropdown
 
     @Min(18)
     private Integer age; // ist required, durch Kalender auswählbar
