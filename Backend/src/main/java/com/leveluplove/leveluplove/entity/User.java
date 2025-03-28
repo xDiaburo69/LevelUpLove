@@ -12,76 +12,84 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "users")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+// User Entity (Benutzertabelle)
+// Speichert alle notwendigen Informationen zum Account selbst (nicht zum Profil!)
+@Entity // Markiert die Klasse als JPA-Entity (wird in der Datenbank als Tabelle angelegt)
+@Table(name = "users") // Tabellenname in der Datenbank
+@Data // Lombok: Erstellt automatisch Getter, Setter, toString, equals, hashCode
+@NoArgsConstructor // Lombok: Erstellt einen leeren Konstruktor
+@AllArgsConstructor // Lombok: Erstellt einen Konstruktor mit allen Attributen
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Hauptschlüssel
 
-    @NotBlank
-    private String email; // ist required
+    @Id // Primärschlüssel
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Automatische ID-Generierung (zählt von selbst hoch)
+    private Long id; // Hauptschlüssel (primary key)
 
-    @NotBlank
-    private String password; // ist required
+    @NotBlank // Pflichtfeld
+    private String email; // Benutzer-E-Mail (wird auch zur Anmeldung genutzt)
 
-    @NotBlank
-    @Size(min = 3, max = 20)
-    private String username; // kann man selbst eintragen
+    @NotBlank // Pflichtfeld
+    private String password; // Gehashter Passwort-Hash (NICHT das Klartext-Passwort)
 
-    @CreationTimestamp
-    @Column(updatable = false)
-    private LocalDateTime createdAt; // wird beim Erstellen vom System angelegt
+    @NotBlank // Pflichtfeld
+    @Size(min = 3, max = 20) // Länge zwischen 3 und 20 Zeichen
+    private String username; // Öffentlicher Username
 
-    @Enumerated(EnumType.STRING)
-    private Roles role;
+    @NotBlank // Pflichtfeld
+    private String gender; // Geschlecht (male, female, other, alien, ...)
 
+    @CreationTimestamp // Wird automatisch beim Erstellen gesetzt
+    @Column(updatable = false) // Darf später nicht mehr geändert werden
+    private LocalDateTime createdAt; // Zeitstempel, wann der Account erstellt wurde
+
+    @Enumerated(EnumType.STRING) // Speichert den Enum-Namen als String (z.B. "USER", "ADMIN")
+    private Roles role; // Rolle des Users
 }
 
+
+// UserProfile Entity (Profiltabelle)
+// Hier liegen die persönlichen Profildaten
 @Entity
 @Table(name = "userprofile")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 class UserProfile {
-    @Id
-    private Long id; // Ist benötigt, um die Beziehung zu User zu erstellen. @MapsId übernimmt den Wert von User.id
 
-    @OneToOne // OneToOne Beziehung, da jeder User nur ein Profil hat
-    @MapsId // MapsId übernimmt den Wert von User.id
-    @JoinColumn(name = "id") // Verknüpft die User.id mit der UserProfile.id
-    private User user; // ist required, da jeder User ein Profil hat
+    @Id // Übernimmt die ID vom User (1:1 Beziehung)
+    private Long id; // Fremdschlüssel zu User.id
+
+    @OneToOne // Jeder User hat genau EIN Profil
+    @MapsId // Nutzt dieselbe ID wie der zugehörige User
+    @JoinColumn(name = "id") // Verknüpfung über User.id
+    private User user; // Referenz auf den zugehörigen User
 
     @Size(min = 3, max = 20)
-    private String name; // ist optional, kann man selbst eintragen
+    private String name; // Optional: Realname
 
-    @NotBlank
-    private String gender; // ist required, wird Dropdown
-
-    @Min(18)
-    private Integer age; // ist required, durch Kalender auswählbar
+    @Min(18) // Mindestalter 18 Jahre
+    private Integer age; // Pflichtfeld (wird meist über Kalender im Frontend ausgewählt)
 
     @NotBlank
     @Size(min = 3, max = 50)
-    private String hometown; // ist required, kann man selbst eintragen
-    private String typeOfLiving; // ist optional, wird Dropdown
+    private String hometown; // Pflichtfeld: Wohnort
 
-    @ElementCollection
+    private String typeOfLiving; // Optional (z.B. alleine, WG, mit Eltern)
+
+    @ElementCollection // JPA: Liste wird in einer Zwischentabelle gespeichert
     @CollectionTable(name = "user_music", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "genre")
-    private List<String> music = new ArrayList<>(); // ist optional, durch dropdown - mehrere markieren
-    private Double height; // ist optional, wird Dropdown
+    private List<String> music = new ArrayList<>(); // Optional: Liste von Lieblingsmusikrichtungen
+
+    private Double height; // Optional: Größe
 
     @Size(min = 3, max = 50)
-    private String education; // ist optional, kann man selbst eintragen
+    private String education; // Optional: Ausbildung / Studium
 
-    private String smoking; // ist optional, kann man selbst eintragen
+    private String smoking; // Optional: Raucherstatus (ja/nein/gelegentlich)
 
     @Size(min = 3, max = 50)
-    private String occupation; // ist optional, kann man selbst eintagen
-    private String familyPlans; // ist optional, wird Dropdown
+    private String occupation; // Optional: Beruf
 
+    private String familyPlans; // Optional: Kinderwunsch etc.
 }
