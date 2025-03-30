@@ -1,0 +1,109 @@
+.navbar {
+  background: linear-gradient(90deg, rgb(122, 26, 122), rgb(33, 33, 105), rgb(1, 1, 3));
+  font-family: monospace;
+  padding: 20px 0;
+  display: flex;
+  flex-wrap: wrap; /* Ermöglicht das Umbruchverhalten bei kleinen Bildschirmen */
+  justify-content: space-between; /* Platzierung der Inhalte */
+  align-items: center; /* Zentriert die Inhalte vertikal */
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-brand span {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center; /* Zentriert den Text */
+}
+
+.navbar img {
+  height: 80px;
+  width: 80px;
+  margin-right: 1rem;
+}
+
+/* Responsives Design */
+@media (max-width: 768px) {
+  .navbar {
+      flex-direction: column; /* Stapelt die Inhalte vertikal bei kleinen Bildschirmen */
+      text-align: center;
+  }
+
+  .navbar-brand {
+      justify-content: center;
+  }
+
+  .navbar img {
+      height: 60px; /* Verkleinert das Logo auf kleineren Bildschirmen */
+      width: 60px;
+  }
+
+  .navbar-brand span {
+      font-size: 1.2rem; /* Verkleinert die Schriftgröße */
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .navbar {
+      flex-direction: column; /* Stapelt die Inhalte vertikal */
+      text-align: center; /* Zentriert den Text */
+      background: linear-gradient(90deg, purple, blue, black); /* Beibehaltung des Hintergrunds */
+      color: white; /* Schriftfarbe wird weiß */
+      padding: 10px; /* Dynamische Anpassung des Innenabstands */
+  }
+
+  .navbar-brand {
+      justify-content: center; /* Zentriert das Logo und den Text */
+      flex-direction: column; /* Stapelt das Logo und den Text vertikal */
+      align-items: center;
+  }
+
+  .navbar img {
+      height: 50px; /* Verkleinert das Logo */
+      width: 50px;
+      margin-bottom: 10px; /* Fügt Abstand zwischen Logo und Text hinzu */
+  }
+
+  .navbar-brand span {
+      font-size: 1.2rem; /* Verkleinert die Schriftgröße */
+      color: white; /* Stellt sicher, dass die Schrift weiß bleibt */
+  }
+}
+
+@media screen and (max-width: 543px) {
+  .navbar {
+      flex-direction: column; /* Stapelt die Inhalte vertikal */
+      text-align: center; /* Zentriert den Text */
+      background: linear-gradient(90deg, purple, blue, black); /* Beibehaltung des Hintergrunds */
+      color: white; /* Schriftfarbe wird weiß */
+      padding: 8px; /* Reduziert den Innenabstand */
+  }
+
+  .navbar-brand {
+      justify-content: center; /* Zentriert das Logo und den Text */
+      flex-direction: column; /* Stapelt das Logo und den Text vertikal */
+      align-items: center;
+  }
+
+  .navbar img {
+      height: 40px; /* Verkleinert das Logo noch weiter */
+      width: 40px;
+      margin-bottom: 8px; /* Fügt Abstand zwischen Logo und Text hinzu */
+  }
+
+  .navbar-brand span {
+      font-size: 1rem; /* Verkleinert die Schriftgröße noch weiter */
+      color: white; /* Stellt sicher, dass die Schrift weiß bleibt */
+  }
+
+  /* Hintergrundbild zentrieren */
+  .header-bg {
+      background-position: center center; /* Zentriert das Bild horizontal und vertikal */
+      background-size: contain; /* Sorgt dafür, dass das gesamte Bild sichtbar bleibt */
+      background-repeat: no-repeat; /* Verhindert Wiederholungen des Bildes */
+  }
+}
