@@ -1,5 +1,6 @@
 package com.leveluplove.leveluplove.config;
 
+import com.leveluplove.leveluplove.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 // Diese Klasse konfiguriert die Sicherheitseinstellungen (Security) für alle API-Endpunkte
@@ -17,7 +19,7 @@ public class SecurityConfig {
 
     // Definiert den Security-Filter für alle HTTP-Anfragen
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
         http
                 // Deaktiviert CSRF-Schutz (Cross-Site Request Forgery)
                 // Grund: Da wir eine REST-API bauen, brauchen wir kein CSRF, da wir keinen Browser-Login-Form-Flow nutzen
@@ -27,11 +29,12 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
 
                         // Alle User dürfen sich registrieren und den Health-Check aufrufen
-                        .requestMatchers("/api/health", "/api/auth/register").permitAll()
+                        .requestMatchers("/api/health", "/api/auth/**").permitAll()
 
                         // Alle anderen Anfragen müssen authentifiziert sein
                         .anyRequest().authenticated()
                 )
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // JWT Filter registrieren
 
                 // Aktiviert Basic-Auth für einfache Tests (Username/Password)
                 // Achtung: Basic-Auth ist nur für Entwicklung / interne APIs sinnvoll
@@ -48,5 +51,6 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
 

@@ -38,6 +38,9 @@ public class User {
     @NotBlank // Pflichtfeld
     private String gender; // Geschlecht (male, female, other, alien, ...)
 
+    @Min(18) // Mindestalter 18 Jahre
+    private Integer age; // Pflichtfeld (wird meist über Kalender im Frontend ausgewählt)
+
     @CreationTimestamp // Wird automatisch beim Erstellen gesetzt
     @Column(updatable = false) // Darf später nicht mehr geändert werden
     private LocalDateTime createdAt; // Zeitstempel, wann der Account erstellt wurde
@@ -67,9 +70,6 @@ class UserProfile {
     @Size(min = 3, max = 20)
     private String name; // Optional: Realname
 
-    @Min(18) // Mindestalter 18 Jahre
-    private Integer age; // Pflichtfeld (wird meist über Kalender im Frontend ausgewählt)
-
     @NotBlank
     @Size(min = 3, max = 50)
     private String hometown; // Pflichtfeld: Wohnort
@@ -87,6 +87,8 @@ class UserProfile {
     private String education; // Optional: Ausbildung / Studium
 
     private String smoking; // Optional: Raucherstatus (ja/nein/gelegentlich)
+
+    private String alcohol; // Optional: trinkt Alkohol (oft, gelegentlich, nie)
 
     @Size(min = 3, max = 50)
     private String occupation; // Optional: Beruf

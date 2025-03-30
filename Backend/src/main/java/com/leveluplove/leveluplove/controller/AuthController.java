@@ -1,13 +1,18 @@
 package com.leveluplove.leveluplove.controller;
 
+import com.leveluplove.leveluplove.dto.LoginDto;
+import com.leveluplove.leveluplove.dto.LoginResponseDto;
 import com.leveluplove.leveluplove.dto.UserRegistrationDto;
 import com.leveluplove.leveluplove.dto.UserResponseDto;
 import com.leveluplove.leveluplove.entity.Roles;
 import com.leveluplove.leveluplove.entity.User;
 import com.leveluplove.leveluplove.repository.UserRepository;
+import com.leveluplove.leveluplove.service.JwtService;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +26,13 @@ public class AuthController {
     // Dependencies (Abhängigkeiten), die für die Registrierung benötigt werden
     private final UserRepository userRepository; // Für den Zugriff auf die User-Datenbank
     private final PasswordEncoder passwordEncoder; // Für das sichere Hashen der Passwörter
+    private final JwtService jwtService;
 
     // Constructor Injection (Best Practice), um Abhängigkeiten bereitzustellen
-    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     // Registrierung eines neuen Users
@@ -59,5 +66,23 @@ public class AuthController {
 
         // Rückgabe an den Client mit Status 201 (Created) und dem erstellten User ohne Passwort
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginDto loginDto) {
+
+        User user = userRepository.findByEmail(loginDto.getEmail())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        // Prüfe Passwort (Klartext -> Hash-Vergleich
+        if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
+            throw new BadCredentialsException("Invalid password");
+        }
+
+        // Geneiert Token wenn alles korrekt ist
+        String jwt = jwtService.generateToken(user);
+
+        // Gibt dem Client den Token zurück
+        return ResponseEntity.ok(new LoginResponseDto(jwt));
     }
 }
