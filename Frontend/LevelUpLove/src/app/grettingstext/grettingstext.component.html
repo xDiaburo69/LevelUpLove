@@ -1,0 +1,28 @@
+<div class="welcome-container">
+    <h1>Find your Player 2 (or 3, wenn du ein Koop-Fan bist)!🎮💜</h1>
+    <p>
+        Egal, ob du nach einem Dungeon-Master fürs Leben, einem Sith-Lord für galaktische Abenteuer oder einem Co-Piloten für epische Cosplay-Battles suchst – bei uns wirst du fündig!
+         Unsere App bringt all jene zusammen, die mehr von Romantik erwarten als nur ein Swipe nach rechts.
+
+         Keine Sorge, hier brauchst du keine +5 Charisma, um Matches zu machen – nur dein nerdiges Selbst!
+         Finde jemanden, der dich nicht fragt: 'Was ist D&D?' Oder der versteht, warum du beim dritten Hobbit-Film Gänsehaut bekommst. 💬✨
+        
+         Warum noch warten? Lade unsere App herunter und starte deine Quest in Richtung ewiger Liebe. 
+         Dein Herz-Power-Up wartet schon auf dich!
+    </p>
+
+    <div class="button-container">
+        <button 
+          class="heart-button" 
+          (mousedown)="startCountdown()" 
+          (mouseup)="resetCountdown()" 
+          (mouseleave)="resetCountdown()">
+          Bist du bereit?
+        </button>
+        <div class="progress-bar-container">
+          <div class="progress-bar" [style.width.%]="progress"></div>
+        </div>
+        <p *ngIf="showMessage" class="ready-message">Los geht's!</p>
+      </div>
+    </div>
+  

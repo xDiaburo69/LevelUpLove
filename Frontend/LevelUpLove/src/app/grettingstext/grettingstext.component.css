@@ -1,0 +1,73 @@
+.welcome-container {
+    text-align: center;
+    color: white;
+    background: rgba(128, 0, 128, 0.507); /* Lila mit Transparenz */
+    padding: 80px;
+    margin: 200px;
+    border-radius: 20px;
+    backdrop-filter: blur(1px);
+    opacity: 0; /* Startet unsichtbar */
+    animation: fadeIn 2s ease-in forwards; /* Animation anwenden */
+}
+
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0; /* Unsichtbar */
+    }
+    to {
+        opacity: 1; /* Sichtbar */
+    }
+}
+
+.welcome-container h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.welcome-container p {
+    font-size: 1.2rem;
+}
+
+.heart-button {
+    background-color: red;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    width: 100px;
+    height: 90px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+    clip-path: polygon(50% 0%, 100% 35%, 85% 100%, 50% 80%, 15% 100%, 0% 35%);
+}
+
+.heart-button:hover {
+    transform: scale(1.1); /* Vergrößert den Button beim Hover */
+}
+
+.heart-button:active {
+    background-color: darkred; /* Ändert die Farbe beim Drücken */
+}
+/* Nachricht nach 5 Sekunden */
+.ready-message {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: limegreen;
+    animation: fadeIn 1s ease-in; /* Sanftes Einblenden */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
