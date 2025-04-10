@@ -9,8 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 // User Entity (Benutzertabelle)
 // Speichert alle notwendigen Informationen zum Account selbst (nicht zum Profil!)
@@ -47,5 +45,6 @@ public class User {
 
     @Enumerated(EnumType.STRING) // Speichert den Enum-Namen als String (z.B. "USER", "ADMIN")
     private Roles role; // Rolle des Users
+
 }
 

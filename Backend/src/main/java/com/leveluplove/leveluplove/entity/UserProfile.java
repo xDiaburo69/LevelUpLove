@@ -1,4 +1,4 @@
-﻿package com.leveluplove.leveluplove.entity;
+package com.leveluplove.leveluplove.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -32,7 +32,7 @@ public class UserProfile {
     @Size(min = 3, max = 20)
     private String name; // Optional: Realname
 
-    @Size(max = 200)
+    @Size(max = 500)
     private String bio;
 
     @NotBlank
