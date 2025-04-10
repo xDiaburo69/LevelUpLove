@@ -53,8 +53,6 @@ public class LikeService {
                 match.setUser2(liked);
                 match.setMatchedAt(LocalDateTime.now());
                 matchRepository.save(match);
-
-                System.out.println("💘 MATCH gespeichert zwischen " + liker.getUsername() + " & " + liked.getUsername());
             }
         }
 
