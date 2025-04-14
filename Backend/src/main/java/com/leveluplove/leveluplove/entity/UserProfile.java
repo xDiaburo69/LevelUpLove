@@ -8,7 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 // UserProfile Entity (Profiltabelle)
 // Hier liegen die persönlichen Profildaten
@@ -44,7 +46,7 @@ public class UserProfile {
     @ElementCollection
     @CollectionTable(name = "user_interests", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "interests")
-    private List<String> interests = new ArrayList<>();
+    private Set<String> interests = new HashSet<>();
 
     @ElementCollection // JPA: Liste wird in einer Zwischentabelle gespeichert
     @CollectionTable(name = "user_music", joinColumns = @JoinColumn(name = "user_id"))
