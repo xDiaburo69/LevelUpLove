@@ -2,25 +2,12 @@
     /* Pfad zum Bild (achte darauf, dass du den korrekten Pfad relativ zum Assets-Ordner angibst) */
     background: url('/assets/images/A%20robot%20man%20and%20a%20purple%20alien%20woman%20falling%20in%20love.png') no-repeat center center;
     background-size: cover; /* Ändere zu 'cover', damit das Bild den gesamten Bereich ausfüllt */
-    height: 200vh; /* Passt die Höhe an die gesamte Bildschirmhöhe an */
+    height: 150vh; /* Passt die Höhe an die gesamte Bildschirmhöhe an */
     width: 100vw; /* Passt die Breite an die gesamte Bildschirmbreite an */
     margin: 0; /* Entfernt mögliche äußere Abstände */
-    padding: 0; /* Entfernt mögliche innere Abstände */
+    padding: 0 200px 200px  ; /* Entfernt mögliche innere Abstände */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Zentriert den Inhalt sowohl horizontal als auch vertikal */
 }
 
-.navbar {
-    position: sticky; /* Fixiert die Navbar, sobald gescrollt wird */
-    top: 0; /* Bleibt oben kleben */
-    width: 100%; /* Volle Breite */
-    z-index: 1000; /* Damit sie über anderen Elementen bleibt */
-    background: rgba(107, 39, 107, 0.486); /* Lila mit Transparenz */
-    backdrop-filter: blur(2px); /* Schöner Unschärfe-Effekt */
-    transition: background 2s ease-in-out;
-    
-  }
-  
-  /* Navbar beim Scrollen noch sichtbarer machen */
-  .navbar.scrolled {
-    background: rgba(31, 41, 85, 0.801); /* Volle Lila-Farbe nach Scrollen */
-  }
-  

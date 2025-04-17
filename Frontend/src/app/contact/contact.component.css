@@ -1,0 +1,132 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
+    background: url('../../assets/images/dnd-lila.png') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+  
+  /* Header */
+  .header {
+    text-align: center;
+    margin: 20px 0;
+    background: rgba(51, 0, 102, 0.8);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px #8a2be2;
+    animation: fadeIn 1.5s ease;
+  }
+  
+  /* Main Container */
+  .main-container {
+    width: 90%;
+    max-width: 700px;
+    padding: 50px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 15px;
+    box-shadow: 0 0 20px #1e90ff;
+    animation: slideIn 2s ease;
+  }
+  
+  /* Kontaktformular */
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background: rgba(75, 0, 130, 0.6);
+    color: white;
+    outline: none;
+    transition: transform 0.3s, border 0.3s;
+  }
+  
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    transform: scale(1.05);
+    border: 1px solid #bb86fc;
+  }
+  
+  /* Success Message */
+  .success-message {
+    text-align: center;
+    margin-top: 20px;
+    color: rgb(226, 233, 226);
+    font-size: 1.5rem;
+    animation: fadeIn 1s ease-in;
+  }
+  .error-message {
+    text-align: center;
+    margin-top: 20px;
+    color: #e8e1e9;
+    font-size: 1.2rem;
+    background-color: rgba(63, 9, 60, 0.644);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid #0e0404;
+    animation: fadeIn 0.6s ease-in;
+  }
+  /* Button */
+  .submit-btn {
+    background: #8a2be2;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  .submit-btn:hover {
+    background: #6a0dad;
+    transform: scale(1.1);
+  }
+  
+  .submit-btn:active {
+    background: #4a008b;
+  }
+  
+  /* Footer */
+  .footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #290730;
+    font-size: 1rem;
+  }
+  
+  /* Animationen */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

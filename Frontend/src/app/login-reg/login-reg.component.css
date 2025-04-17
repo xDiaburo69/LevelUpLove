@@ -1,0 +1,111 @@
+:host {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  
+  .main {
+    width: 100%;
+    background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38") no-repeat center/cover;
+    border-radius: 10px;
+    box-shadow: 5px 20px 50px #000;
+    overflow: hidden;
+    padding: 2rem 1rem;
+    position: relative;
+  }
+  
+  #chk {
+    display: none;
+  }
+  
+  .signup,
+  .login {
+    width: 100%;
+  }
+  
+  .signup form,
+  .login form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  label {
+    color: #fff;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.5s ease-in-out;
+    text-align: center;
+  }
+  
+  input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #e0dede;
+    outline: none;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  
+  button {
+    width: 100%;
+    padding: 12px;
+    color: #fff;
+    background: #573b8a;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease-in;
+  }
+  
+  button:hover {
+    background: #6d44b8;
+  }
+  
+  .login {
+    background: #eee;
+    border-radius: 60% / 10%;
+    transform: translateY(-180px);
+    transition: 0.8s ease-in-out;
+  }
+  
+  .login label {
+    color: #573b8a;
+    transform: scale(0.6);
+  }
+  
+  #chk:checked ~ .login {
+    transform: translateY(-500px);
+  }
+  
+  #chk:checked ~ .login label {
+    transform: scale(1);
+  }
+  
+  #chk:checked ~ .signup label {
+    transform: scale(0.6);
+  }
+  
+  /* Responsive */
+  @media (max-width: 480px) {
+    .main {
+      padding: 1rem;
+    }
+  
+    label {
+      font-size: 1.5em;
+    }
+  
+    input, button {
+      font-size: 0.9rem;
+    }
+  }
+  
