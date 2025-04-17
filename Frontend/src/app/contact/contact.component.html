@@ -1,0 +1,34 @@
+<header class="header">
+    <h1>Willkommen in der Festung der Unterstützung</h1>
+    <p>Hast du ein Anliegen oder eine Beschwerde? Die Magier sind bereit!</p>
+  </header>
+  
+  <main class="main-container">
+    <form class="contact-form" (ngSubmit)="onSubmit()" #form="ngForm">
+      <h2>Sende uns deinen Zauberspruch</h2>
+  
+      <label for="name">Dein Abenteurer-Name</label>
+      <input type="text" id="name" [(ngModel)]="name" name="name" placeholder="Gib deinen Namen ein..." required />
+  
+      <label for="email">Deine magische E-Mail</label>
+      <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="Gib deine E-Mail ein..." required />
+  
+      <label for="message">Deine Nachricht</label>
+      <textarea id="message" [(ngModel)]="message" name="message" rows="5" placeholder="Dein Anliegen oder Beschwerde..." required></textarea>
+  
+      <button class="submit-btn" type="submit">🧙 Senden</button>
+    </form>
+  
+    <div class="success-message" *ngIf="showSuccessMessage">
+      🎉 Deine Nachricht wurde erfolgreich gesendet! Vielen Dank, Abenteurer!
+    </div>
+  </main>
+
+  <div class="error-message" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+  
+  <footer class="footer">
+    <p>🎲 LevelUpLove Support – Alle Rechte vorbehalten © 2025</p>
+  </footer>
+  

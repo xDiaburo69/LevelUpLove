@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LoginRegComponent } from '../login-reg/login-reg.component';
 
 @Component({
   selector: 'app-grettingstext', // Der Selector muss mit dem HTML-Tag übereinstimmen
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, LoginRegComponent],
   templateUrl: './grettingstext.component.html',
   styleUrls: ['./grettingstext.component.css']
 })

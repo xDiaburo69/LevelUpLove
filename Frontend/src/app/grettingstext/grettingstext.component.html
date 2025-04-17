@@ -10,19 +10,7 @@
          Warum noch warten? Lade unsere App herunter und starte deine Quest in Richtung ewiger Liebe. 
          Dein Herz-Power-Up wartet schon auf dich!
     </p>
+    <app-login-reg></app-login-reg>
 
-    <div class="button-container">
-        <button 
-          class="heart-button" 
-          (mousedown)="startCountdown()" 
-          (mouseup)="resetCountdown()" 
-          (mouseleave)="resetCountdown()">
-          Bist du bereit?
-        </button>
-        <div class="progress-bar-container">
-          <div class="progress-bar" [style.width.%]="progress"></div>
-        </div>
-        <p *ngIf="showMessage" class="ready-message">Los geht's!</p>
-      </div>
     </div>
   
