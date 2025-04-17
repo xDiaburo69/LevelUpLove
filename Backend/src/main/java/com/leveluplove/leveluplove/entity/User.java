@@ -1,50 +1,79 @@
 package com.leveluplove.leveluplove.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import java.time.LocalDateTime;
 
-// User Entity (Benutzertabelle)
-// Speichert alle notwendigen Informationen zum Account selbst (nicht zum Profil!)
-@Entity // Markiert die Klasse als JPA-Entity (wird in der Datenbank als Tabelle angelegt)
-@Table(name = "users") // Tabellenname in der Datenbank
-@Data // Lombok: Erstellt automatisch Getter, Setter, toString, equals, hashCode
-@NoArgsConstructor // Lombok: Erstellt einen leeren Konstruktor
-@AllArgsConstructor // Lombok: Erstellt einen Konstruktor mit allen Attributen
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+
+/**
+ * User Entity: speichert Kontoinformationen.
+ * Das Alter wird nicht mehr persistiert, sondern
+ * bei jedem Zugriff aus birthdate berechnet.
+ */
+@Entity
+@Table(name = "users")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
-    @Id // Primärschlüssel
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Automatische ID-Generierung (zählt von selbst hoch)
-    private Long id; // Hauptschlüssel (primary key)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @NotBlank // Pflichtfeld
-    private String email; // Benutzer-E-Mail (wird auch zur Anmeldung genutzt)
+    @NotBlank
+    private String email;
 
-    @NotBlank // Pflichtfeld
-    private String password; // Gehashter Passwort-Hash (NICHT das Klartext-Passwort)
+    @NotBlank
+    private String password;
 
-    @NotBlank // Pflichtfeld
-    @Size(min = 3, max = 20) // Länge zwischen 3 und 20 Zeichen
-    private String username; // Öffentlicher Username
+    @NotBlank
+    @Size(min = 3, max = 20)
+    private String username;
 
-    @NotBlank // Pflichtfeld
-    private String gender; // Geschlecht (male, female, other, alien, ...)
+    @NotBlank
+    private String gender;
 
-    @Min(18) // Mindestalter 18 Jahre
-    private Integer age; // Pflichtfeld (wird meist über Kalender im Frontend ausgewählt)
+    /**
+     * Geburtsdatum speichern, um Alter zu berechnen.
+     * Muss bei der Registrierung übermittelt werden.
+     */
+    @NotNull(message = "Birthdate can't be empty.")
+    @Past(message = "Birthdate has to be in the past.")
+    @JsonFormat(pattern = "dd.MM.yyyy")
+    @Column(nullable = false)
+    private LocalDate birthdate;
 
-    @CreationTimestamp // Wird automatisch beim Erstellen gesetzt
-    @Column(updatable = false) // Darf später nicht mehr geändert werden
-    private LocalDateTime createdAt; // Zeitstempel, wann der Account erstellt wurde
+    /**
+     * Erstellungszeitstempel des Accounts.
+     * Wird automatisch gesetzt und nicht mehr änderbar.
+     */
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 
-    @Enumerated(EnumType.STRING) // Speichert den Enum-Namen als String (z.B. "USER", "ADMIN")
-    private Roles role; // Rolle des Users
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
+    /**
+     * Berechnet das Alter in Jahren aus birthdate.
+     * @return Alter in Jahren oder null, falls birthdate fehlt
+     */
+    @Transient
+    @JsonProperty("age")
+    public Integer getAge() {
+        if (birthdate == null) return null;
+        return Period.between(birthdate, LocalDate.now()).getYears();
+    }
 }
-

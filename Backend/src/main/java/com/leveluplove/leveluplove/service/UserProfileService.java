@@ -11,68 +11,77 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 /**
- * Service-Klasse für die Verwaltung von Benutzerprofilen
- * Bietet Funktionen zum Erstellen, Aktualisieren und Abrufen von Profildaten
+ * Service-Klasse für die Verwaltung von Benutzerprofilen.
+ * Hier legen wir Profile an oder aktualisieren bestehende.
  */
 @Service
 public class UserProfileService {
 
-    @Autowired
-    private UserRepository userRepository; // Repository für Benutzerdaten
-
-    @Autowired
-    private UserProfileRepository userProfileRepository; // Repository für Profildaten
+    private final UserRepository userRepository;
+    private final UserProfileRepository userProfileRepository;
 
     /**
-     * Erstellt ein neues Benutzerprofil oder aktualisiert ein bestehendes
-     * 
-     * @param userId ID des Benutzers
-     * @param profileData Die neuen Profildaten
-     * @return Das erstellte oder aktualisierte Benutzerprofil
-     * @throws IllegalArgumentException wenn der Benutzer nicht gefunden wird
+     * Konstruktor-Injektion aller benötigten Repositories.
      */
-    @Transactional
-    public UserProfile createOrUpdateProfile(Long userId, UserProfile profileData) {
-        // Benutzer anhand der ID suchen oder Exception werfen, wenn nicht gefunden
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("User not found with ID: " + userId));
+    @Autowired
+    public UserProfileService(UserRepository userRepository,
+                              UserProfileRepository userProfileRepository) {
+        this.userRepository        = userRepository;
+        this.userProfileRepository = userProfileRepository;
+    }
 
-        // Prüfen, ob bereits ein Profil für diesen Benutzer existiert
-        Optional<UserProfile> existingProfile = userProfileRepository.findById(userId);
-        UserProfile profile;
-
-        if (existingProfile.isPresent()) {
-            // Bestehendes Profil aktualisieren
-            profile = existingProfile.get();
-            // Nicht-null Eigenschaften aus den übergebenen Daten in das bestehende Profil kopieren
-            if (profileData.getName() != null) profile.setName(profileData.getName());
-            if (profileData.getBio() != null) profile.setBio(profileData.getBio());
-            if (profileData.getHometown() != null) profile.setHometown(profileData.getHometown());
-            if (profileData.getTypeOfLiving() != null) profile.setTypeOfLiving(profileData.getTypeOfLiving());
-            if (profileData.getInterests() != null) profile.setInterests(profileData.getInterests());
-            if (profileData.getMusic() != null) profile.setMusic(profileData.getMusic());
-            if (profileData.getHeight() != null) profile.setHeight(profileData.getHeight());
-            if (profileData.getEducation() != null) profile.setEducation(profileData.getEducation());
-            if (profileData.getSmoking() != null) profile.setSmoking(profileData.getSmoking());
-            if (profileData.getAlcohol() != null) profile.setAlcohol(profileData.getAlcohol());
-            if (profileData.getOccupation() != null) profile.setOccupation(profileData.getOccupation());
-            if (profileData.getFamilyPlans() != null) profile.setFamilyPlans(profileData.getFamilyPlans());
-        } else {
-            // Neues Profil erstellen
-            profile = profileData;
-            profile.setId(userId); // ID des Profils entspricht der Benutzer-ID
-            profile.setUser(user); // Benutzer-Referenz setzen
-        }
-
-        // Profil speichern und zurückgeben
+    /**
+     * Legt ein neues Benutzerprofil an.
+     * Wird direkt nach dem Anlegen eines Users aufgerufen.
+     *
+     * @param profile Das Profil-Objekt, das bereits Felder wie user, username, gender und birthdate gesetzt hat.
+     * @return Das gespeicherte UserProfile.
+     */
+    public UserProfile createProfile(UserProfile profile) {
         return userProfileRepository.save(profile);
     }
 
     /**
-     * Ruft das Benutzerprofil anhand der Benutzer-ID ab
-     * 
-     * @param userId ID des Benutzers
-     * @return Optional mit dem Benutzerprofil oder leer, wenn nicht gefunden
+     * Erstellt ein neues Profil oder aktualisiert ein bestehendes.
+     * Kopiert nur nicht-null-Felder aus profileData in das existierende Profil.
+     *
+     * @param userId      ID des Benutzers, zu dem das Profil gehört.
+     * @param profileData Profildaten mit den Werten, die gesetzt werden sollen.
+     * @return Das neu erstellte oder aktualisierte Profil.
+     * @throws IllegalArgumentException wenn kein User mit der angegebenen ID existiert.
+     */
+    @Transactional
+    public UserProfile createOrUpdateProfile(Long userId, UserProfile profileData) {
+        // 1) Sicherstellen, dass der User existiert
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User nicht gefunden mit ID: " + userId));
+
+        // 2) Prüfen, ob schon ein Profil existiert
+        Optional<UserProfile> optProfile = userProfileRepository.findById(userId);
+        UserProfile profile;
+        if (optProfile.isPresent()) {
+            // Profil aktualisieren: nur Felder überschreiben, die profileData nicht-null sind
+            profile = optProfile.get();
+            if (profileData.getUsername()  != null) profile.setUsername(profileData.getUsername());
+            if (profileData.getGender()    != null) profile.setGender(profileData.getGender());
+            if (profileData.getBirthdate() != null) profile.setBirthdate(profileData.getBirthdate());
+            // hier bei Bedarf weitere Felder hinzufügen...
+        } else {
+            // Neues Profil anlegen
+            profile = profileData;
+            profile.setId(userId);    // @MapsId syncs ID mit dem User
+            profile.setUser(user);    // Verknüpfung zum User
+        }
+
+        // 3) Speichern und zurückgeben
+        return userProfileRepository.save(profile);
+    }
+
+    /**
+     * Liefert das Profil eines Nutzers, falls vorhanden.
+     *
+     * @param userId ID des Users.
+     * @return Optional mit dem Profil oder leer, falls keines existiert.
      */
     @Transactional(readOnly = true)
     public Optional<UserProfile> getUserProfile(Long userId) {

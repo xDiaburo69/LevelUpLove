@@ -1,11 +1,12 @@
 package com.leveluplove.leveluplove.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 
 // Data Transfer Object (DTO) für die Registrierung eines neuen Users
@@ -14,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Data // Lombok generiert automatisch Getter, Setter, toString, equals und hashCode
 @NoArgsConstructor // Lombok generiert einen leeren (parameterlosen) Konstruktor
 @AllArgsConstructor // Lombok generiert einen Konstruktor mit allen Feldern
-
 public class UserRegistrationDto {
 
     // Pflichtfeld (darf nicht leer sein) und muss eine gültige E-Mail sein
@@ -43,4 +43,9 @@ public class UserRegistrationDto {
     // Pflichtfeld (darf nicht leer sein)
     @NotBlank
     private String gender;
+
+    @NotNull
+    @Past(message = "Birthdate has to be in the past.")
+    @JsonFormat(pattern = "dd.MM.yyyy")
+    private LocalDate birthdate;
 }

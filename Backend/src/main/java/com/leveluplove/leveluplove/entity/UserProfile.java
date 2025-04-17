@@ -1,12 +1,18 @@
 package com.leveluplove.leveluplove.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +35,28 @@ public class UserProfile {
     @JoinColumn(name = "id") // Verknüpfung über User.id
     private User user; // Referenz auf den zugehörigen User
 
+    @NotBlank
+    String username;
 
+    @NotBlank
+    String gender;
+
+    @NotNull(message = "Birthdate can't be empty.")
+    @Past(message = "Birthdate has to be in the past.")
+    @JsonFormat(pattern = "dd.MM.yyyy")
+    @Column(nullable = false)
+    private LocalDate birthdate;
+
+    /**
+     * Berechnet das Alter in Jahren basierend auf birthdate.
+     * @return Alter in Jahren oder null, falls birthdate nicht gesetzt
+     */
+    @Transient
+    @JsonProperty("age")
+    public Integer getAge() {
+        if (birthdate == null) return null;
+        return Period.between(birthdate, LocalDate.now()).getYears();
+    }
 
     @Size(min = 3, max = 20)
     private String name; // Optional: Realname
@@ -37,8 +64,8 @@ public class UserProfile {
     @Size(max = 500)
     private String bio;
 
-    @NotBlank
     @Size(min = 3, max = 50)
+    @Column(nullable = true)
     private String hometown; // Pflichtfeld: Wohnort
 
     private String typeOfLiving; // Optional (z.B. alleine, WG, mit Eltern)
