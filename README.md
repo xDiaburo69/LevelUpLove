@@ -1,17 +1,7 @@
-<p>
-  <a href="https://github.com/xDiaburo69/LevelUpLove/tree/main/Backend" target="_blank" rel="noopener">
-    <img src="https://img.shields.io/badge/Spring_Boot-v3.3.10-green?logo=spring" alt="Spring Boot">
-  </a>
-  <a href="https://github.com/xDiaburo69/LevelUpLove/tree/main/Frontend" target="_blank" rel="noopener">
-    <img src="https://img.shields.io/badge/Angular-v19-red?logo=angular" alt="Angular">
-  </a>
-  <a href="#" target="_blank" rel="noopener">
-    <img src="https://img.shields.io/badge/Coverage-20%25-lightgrey" alt="Coverage">
-  </a>
-  <a href="./LICENSE" target="_blank" rel="noopener">
-    <img src="https://img.shields.io/badge/license-MIT-yellow.svg" alt="License: MIT">
-  </a>
-</p>
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-v3.3.10-green?logo=spring)](https://github.com/xDiaburo69/LevelUpLove/tree/main/Backend)
+[![Angular](https://img.shields.io/badge/Angular-v19-red?logo=angular)](https://github.com/xDiaburo69/LevelUpLove/tree/main/Frontend)
+[![Coverage](https://img.shields.io/badge/Coverage-20%25-lightgrey)](#)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](./LICENSE)
 
 
 # LevelUpLove – Dating App
@@ -134,8 +124,9 @@ This project is licensed under the MIT License – see the [LICENSE](./LICENSE) 
 
 ## 📬 Contact & Socials
 
-- **GitHub:**  
-  <a href="https://github.com/Madame-parker" target="_blank" rel="noopener">Madame Parker</a>  
-  <a href="https://github.com/xDiaburo69" target="_blank" rel="noopener">Diaburo</a>  
-- **LinkedIn:**  
-  <a href="https://www.linkedin.com/in/jordan-betz-927b77310" target="_blank" rel="noopener">Diaburo</a>
+- **GitHub:** <br>
+[Madame Parker](https://github.com/Madame-parker) <br>
+[Diaburo](https://github.com/xDiaburo69)
+
+- **LinkedIn:** <br>
+[Diaburo](https://www.linkedin.com/in/jordan-betz-927b77310)  
