@@ -129,4 +129,5 @@ This project is licensed under the MIT License – see the [LICENSE](./LICENSE) 
 [Diaburo](https://github.com/xDiaburo69)
 
 - **LinkedIn:** <br>
-[Diaburo](https://www.linkedin.com/in/jordan-betz-927b77310)  
+[Diaburo](https://www.linkedin.com/in/jordan-betz-927b77310) <br>
+[Madame Parker](https://www.linkedin.com/in/bonnie-b%C3%B6ttcher-797803324)
