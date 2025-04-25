@@ -1,52 +1,64 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private _isLoggedIn = signal(false);
   private _username = signal<string | null>(null);
+  private tokenKey = 'authToken';
 
+ 
+  private loginUrl = 'localhost:8080/api/auth/login';
+  private registerUrl = 'localhost:8080/api/auth/register';
+  private profileUrl = 'localhost:8080/api/users/{id}/profile';
 
-  // Getter für den Login-Status
+  constructor(private http: HttpClient) {
+    // Token beim Start prüfen
+    const token = localStorage.getItem(this.tokenKey);
+    if (token) {
+      this._isLoggedIn.set(true);
+      // Optional: username vom Backend holen
+    }
+  }
   get isLoggedIn(): boolean {
     return this._isLoggedIn();
   }
-  // Getter für den Benutzernamen
   get username(): string | null {
     return this._username();
   }
-
-  private apiUrl = 'https://your-api-url.com'; // Backend-URL (oder Dummy)
-
-  constructor(private http: HttpClient) {}
-
-  // Dummy Login (Backend später!)
+  /** Login mit Token-Speicherung */
   login(email: string, password: string): Observable<any> {
-    if (email === 'test@test.com' && password === '123456') {
-      this._isLoggedIn.set(true);
-      this._username.set('Madame Parker'); // ← hier später response.username
-      return of({ message: 'Login erfolgreich', username: 'Madame Parker' });
-    }
-
-    this._isLoggedIn.set(false);
-    this._username.set(null);
-    return throwError(() => new Error('Falsche Zugangsdaten'));
+    return this.http.post<{ username: string; token: string }>(`${this.loginUrl}/login`, { email, password }).pipe(
+      tap(response => {
+        this._isLoggedIn.set(true);
+        this._username.set(response.username);
+        localStorage.setItem(this.tokenKey, response.token);
+      })
+    );
   }
 
-    /** ✅ Dummy Registrierung */
-    register(username: string, email: string, phone: string, password: string): Observable<any> {
-      // Später: Hier deine echte API!
-      return of({ message: 'Registrierung erfolgreich', username });
-    }
+  /** Registrierung (wie vorher) */
+  register(username: string, email: string, phone: string, password: string): Observable<any> {
+    return this.http.post(`${this.registerUrl}/register`, {
+      username, email, phone, password
+    });
+  }
 
+  /** Logout: Token löschen */
   logout(): void {
     this._isLoggedIn.set(false);
     this._username.set(null);
+    localStorage.removeItem(this.tokenKey);
   }
 
-  // Später: Benutzerprofil laden
+  /** Benutzerprofil laden */
   loadUserProfile(): Observable<any> {
-    return this.http.get('/api/profile'); // später vom echten Backend
+    return this.http.get(`${this.profileUrl}/profile`);
+  }
+
+  /** Token auslesen (z. B. für Interceptor) */
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
   }
 }

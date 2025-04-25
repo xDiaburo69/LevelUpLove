@@ -39,6 +39,10 @@
       <h2>💖 Benutzername: {{ profile.username }}</h2>
       <ul>
         <li>
+          Name:
+          <input *ngIf="editMode" [(ngModel)]="profile.name" />
+          <span *ngIf="!editMode">{{ profile.name }}</span>
+        <li>
           Geschlecht:
           <select [(ngModel)]="profile.gender" class="dropdown" [disabled]="!editMode">
             <option value="goblin">Goblin (Männlich)</option>
@@ -56,6 +60,10 @@
           <input *ngIf="editMode" type="number" [(ngModel)]="profile.age" />
           <span *ngIf="!editMode">{{ profile.age }}</span>
         </li>
+        <li>
+          Geburtsdatum:
+          <input *ngIf="editMode" type="date" [(ngModel)]="profile.birthdate" />
+          <span *ngIf="!editMode">{{ profile.birthdate | date }}</span>
         <li>
           Biografie:
           <textarea *ngIf="editMode" [(ngModel)]="profile.bio"></textarea>
@@ -94,9 +102,23 @@
           <span *ngIf="!editMode">{{ profile.smoker }}</span>
         </li>
         <li>
+          Alkohol:
+          <input *ngIf="editMode" [(ngModel)]="profile.alcohol" />
+          <span *ngIf="!editMode">{{ profile.alcohol }}</span>
+        <li>
+          Haustiere:
+          <input *ngIf="editMode" [(ngModel)]="profile.pets" />
+          <span *ngIf="!editMode">{{ profile.pets }}</span>
+        </li>
+        <li>
           Beruf:
           <input *ngIf="editMode" [(ngModel)]="profile.job" />
           <span *ngIf="!editMode">{{ profile.job }}</span>
+        </li>
+        <li>
+          Hobbys:
+          <input *ngIf="editMode" [(ngModel)]="profile.hobbies" />
+          <span *ngIf="!editMode">{{ profile.hobbies }}</span>
         </li>
         <li>
           Wohnsituation:
