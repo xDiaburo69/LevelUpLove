@@ -64,7 +64,7 @@ public class UserProfile {
     @Size(max = 500)
     private String bio;
 
-    @Size(min = 3, max = 50)
+   // @Size(min = 3, max = 50)
     @Column(nullable = true)
     private String hometown; // Pflichtfeld: Wohnort
 
@@ -93,6 +93,8 @@ public class UserProfile {
     private String occupation; // Optional: Beruf
 
     private String familyPlans; // Optional: Kinderwunsch etc.
+
+    private String pets; // Optional: Haustiere (Hund/Katze/andere)
 
     // Beziehung zu Profilbildern (ein Profil kann mehrere Bilder haben)
     @OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL, orphanRemoval = true)
