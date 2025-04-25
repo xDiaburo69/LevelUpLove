@@ -3,54 +3,51 @@ package com.leveluplove.leveluplove.config;
 import com.leveluplove.leveluplove.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.List;
 
-// Diese Klasse konfiguriert die Sicherheitseinstellungen (Security) für alle API-Endpunkte
-@Configuration // Kennzeichnet diese Klasse als Konfigurationsklasse (Spring Boot erkennt das automatisch)
-@EnableWebSecurity // Aktiviert Spring Security für die gesamte Anwendung
+@Configuration
+@EnableWebSecurity
 public class SecurityConfig {
-
-    // Definiert den Security-Filter für alle HTTP-Anfragen
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
         http
-                // Deaktiviert CSRF-Schutz (Cross-Site Request Forgery)
-                // Grund: Da wir eine REST-API bauen, brauchen wir kein CSRF, da wir keinen Browser-Login-Form-Flow nutzen
                 .csrf(csrf -> csrf.disable())
-
-                // Hier definiert man, welche Anfragen ohne Authentifizierung erlaubt sind
+                .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-
-                        // Alle User dürfen sich registrieren und den Health-Check aufrufen
-                        .requestMatchers("/api/health", "/api/auth/**").permitAll()
-
-                        // Alle anderen Anfragen müssen authentifiziert sein
+                        .requestMatchers("/api/auth/**", "/api/health").permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class) // JWT Filter registrieren
-
-                // Aktiviert Basic-Auth für einfache Tests (Username/Password)
-                // Achtung: Basic-Auth ist nur für Entwicklung / interne APIs sinnvoll
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .httpBasic(Customizer.withDefaults());
-
-        // Gibt die Security-Konfiguration zurück
         return http.build();
     }
 
-    // Definiert den PasswordEncoder
-    // BCrypt verschlüsselt die Passwörter, damit sie sicher in der Datenbank gespeichert werden
-    // Wird später beim User-Registrieren und Login verwendet
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(List.of("http://localhost:4200"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        config.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }
-

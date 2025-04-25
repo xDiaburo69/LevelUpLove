@@ -39,7 +39,7 @@ export class LoginRegComponent implements OnInit {
   email = '';
   password = '';
   username = '';
-  phone = '';
+  gender = '';
   birthdate = '';
 
 
@@ -67,13 +67,14 @@ export class LoginRegComponent implements OnInit {
   }
 
   doRegister() {
-    this.auth.register(this.username, this.email, this.phone, this.password).subscribe(
-      response => {
+    this.auth.register(this.username, this.email, this.gender, this.password, this.birthdate)
+    .subscribe(
+      () => {
         alert('Registrierung erfolgreich! Bitte einloggen.');
-        this.isLoginMode = true;
+        this.toggleMode();
       },
-      error => {
-        alert('Registrierung fehlgeschlagen: ' + error.message);
+      err => {
+        alert('Registrierung fehlgeschlagen: ' + err.error.message);
       }
     );
   }

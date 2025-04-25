@@ -91,10 +91,10 @@ public class AuthController {
             throw new BadCredentialsException("Invalid password");
         }
 
-        // Geneiert Token wenn alles korrekt ist
+        // Generiert Token, wenn alles korrekt ist
         String jwt = jwtService.generateToken(user);
 
         // Gibt dem Client den Token zurück
-        return ResponseEntity.ok(new LoginResponseDto(jwt));
+        return ResponseEntity.ok(new LoginResponseDto(user.getUsername(), jwt));
     }
 }

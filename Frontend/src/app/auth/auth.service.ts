@@ -9,9 +9,9 @@ export class AuthService {
   private tokenKey = 'authToken';
 
  
-  private loginUrl = 'localhost:8080/api/auth/login';
-  private registerUrl = 'localhost:8080/api/auth/register';
-  private profileUrl = 'localhost:8080/api/users/{id}/profile';
+  private loginUrl = 'http://localhost:8080/api/auth/login';
+  private registerUrl = 'http://localhost:8080/api/auth/register';
+  private profileUrl = 'http://localhost:8080/api/users/{id}/profile';
 
   constructor(private http: HttpClient) {
     // Token beim Start prüfen
@@ -29,7 +29,7 @@ export class AuthService {
   }
   /** Login mit Token-Speicherung */
   login(email: string, password: string): Observable<any> {
-    return this.http.post<{ username: string; token: string }>(`${this.loginUrl}/login`, { email, password }).pipe(
+    return this.http.post<{ username: string; token: string }>(`${this.loginUrl}`, { email, password }).pipe(
       tap(response => {
         this._isLoggedIn.set(true);
         this._username.set(response.username);
@@ -39,9 +39,9 @@ export class AuthService {
   }
 
   /** Registrierung (wie vorher) */
-  register(username: string, email: string, phone: string, password: string): Observable<any> {
-    return this.http.post(`${this.registerUrl}/register`, {
-      username, email, phone, password
+  register(username: string, email: string, gender: string, password: string, birthdate: string): Observable<any> {
+    return this.http.post(`${this.registerUrl}`, {
+      username, email, gender, password, birthdate
     });
   }
 
@@ -54,7 +54,7 @@ export class AuthService {
 
   /** Benutzerprofil laden */
   loadUserProfile(): Observable<any> {
-    return this.http.get(`${this.profileUrl}/profile`);
+    return this.http.get(`${this.profileUrl}`);
   }
 
   /** Token auslesen (z. B. für Interceptor) */

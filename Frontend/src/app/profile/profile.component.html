@@ -52,8 +52,8 @@
         </li>
         <li>
           Wohnort:
-          <input *ngIf="editMode" [(ngModel)]="profile.location" />
-          <span *ngIf="!editMode">{{ profile.location }}</span>
+          <input *ngIf="editMode" [(ngModel)]="profile.hometown" />
+          <span *ngIf="!editMode">{{ profile.hometown }}</span>
         </li>
         <li>
           Alter:
@@ -63,7 +63,7 @@
         <li>
           Geburtsdatum:
           <input *ngIf="editMode" type="date" [(ngModel)]="profile.birthdate" />
-          <span *ngIf="!editMode">{{ profile.birthdate | date }}</span>
+          <span *ngIf="!editMode">{{ profile.birthdate }}</span>
         <li>
           Biografie:
           <textarea *ngIf="editMode" [(ngModel)]="profile.bio"></textarea>
@@ -74,13 +74,13 @@
           <input *ngIf="editMode" [(ngModel)]="profile.music" />
           <span *ngIf="!editMode">{{ profile.music }}</span>
         </li>
-        <li>
+        <!-- <li>
           Persönlichkeit:
           <select [(ngModel)]="profile.personality" class="dropdown" [disabled]="!editMode">
             <option value="Ex">Extrovertiert</option>
             <option value="IN">Introvertiert</option>
           </select>
-        </li>
+        </li> -->
         <li>
           Größe:
           <input *ngIf="editMode" [(ngModel)]="profile.height" />
@@ -93,13 +93,13 @@
         </li>
         <li>
           Kinder:
-          <input *ngIf="editMode" [(ngModel)]="profile.kids" />
-          <span *ngIf="!editMode">{{ profile.kids }}</span>
+          <input *ngIf="editMode" [(ngModel)]="profile.familyPlans" />
+          <span *ngIf="!editMode">{{ profile.familyPlans }}</span>
         </li>
         <li>
           Raucher:
-          <input *ngIf="editMode" [(ngModel)]="profile.smoker" />
-          <span *ngIf="!editMode">{{ profile.smoker }}</span>
+          <input *ngIf="editMode" [(ngModel)]="profile.smoking" />
+          <span *ngIf="!editMode">{{ profile.smoking }}</span>
         </li>
         <li>
           Alkohol:
@@ -112,17 +112,17 @@
         </li>
         <li>
           Beruf:
-          <input *ngIf="editMode" [(ngModel)]="profile.job" />
-          <span *ngIf="!editMode">{{ profile.job }}</span>
+          <input *ngIf="editMode" [(ngModel)]="profile.occupation" />
+          <span *ngIf="!editMode">{{ profile.occupation }}</span>
         </li>
         <li>
           Hobbys:
-          <input *ngIf="editMode" [(ngModel)]="profile.hobbies" />
-          <span *ngIf="!editMode">{{ profile.hobbies }}</span>
+          <input *ngIf="editMode" [(ngModel)]="profile.interests" />
+          <span *ngIf="!editMode">{{ profile.interests }}</span>
         </li>
         <li>
           Wohnsituation:
-          <select [(ngModel)]="profile.livingSituation" class="dropdown" [disabled]="!editMode">
+          <select [(ngModel)]="profile.typeOfLiving" class="dropdown" [disabled]="!editMode">
             <option value="alone">Alleine</option>
             <option value="parents">Bei Mama und Papa</option>
             <option value="bridge">Unter einer Brücke</option>
