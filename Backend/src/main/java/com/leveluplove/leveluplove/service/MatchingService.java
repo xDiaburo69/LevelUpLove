@@ -33,9 +33,7 @@ public class MatchingService {
                     Set<String> union = new HashSet<>(currentInterests);
                     union.addAll(otherInterests);
 
-                    int score = union.isEmpty()
-                            ? 0
-                            : (int) ((intersection.size() * 100.0) / union.size());
+                    int score = union.isEmpty() ? 0 : (int) ((intersection.size() * 100.0) / union.size());
 
                     return new MatchSuggestionDto(
                             profile.getUser().getId(),
