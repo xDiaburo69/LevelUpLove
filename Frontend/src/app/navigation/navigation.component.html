@@ -1,19 +1,53 @@
-<nav class="navbar navbar-expand-lg bg-body-lilac" data-bs-theme="dark" [ngClass]="{ 'scrolled': isScrolled }">
+<!-- navigation.component.html -->
+<nav class="navbar navbar-expand-lg" [ngClass]="{ 'scrolled': isScrolled }">
   <div class="container-fluid">
-    <a class="navbar-brand">Herzlich Willkommen Geek!</a>
+    <a class="navbar-brand centered-logo" >
+      <span class="sparkle-heart">✨</span>
     
-    <!-- Navbar-Toggler für das Dropdown-Menü auf kleinen Bildschirmen -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="brand-text" *ngIf="!isLoggedIn">
+        LevelUpLove
+      </span>
+    
+      <span class="brand-text" *ngIf="isLoggedIn">
+        Sei gegrüßt, {{ username }}
+      </span>
+    
+      <span class="sparkle-heart">✨</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <!-- Links, die in das Dropdown wandern, wenn der Bildschirm kleiner wird -->
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link active" aria-current="page"routerLink="/">Startseite</a>
-        <a class="nav-link active" routerLink="about-us">Über uns</a>
-        <a class="nav-link active" routerLink="contact">Kontakt</a>
-      </div>
-      
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-center">
+
+        <ng-container *ngIf="!isLoggedIn">
+          <li class="nav-item"><a class="nav-link" routerLink="/">Startseite</a></li>
+        </ng-container>
+
+
+        <ng-container *ngIf="isLoggedIn">
+          <!-- Diese Links nur für eingeloggte User -->
+          <li class="nav-item"><a class="nav-link" routerLink="/discover">Discover</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/profile">Profil</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/messages">Nachrichten</a></li>
+          
+        </ng-container>
+
+
+        <ng-container >
+          
+          <li class="nav-item"><a class="nav-link" routerLink="/about-us">Über uns</a></li>
+          <li class="nav-item"><a class="nav-link" routerLink="/contact">Kontakt</a></li>
+          
+        </ng-container>
+
+        <ng-container *ngIf="isLoggedIn">
+          <li class="nav-item"><a class="nav-link" (click)="logout()">Abmelden</a></li>
+        </ng-container>
+
+      </ul>
     </div>
   </div>
 </nav>

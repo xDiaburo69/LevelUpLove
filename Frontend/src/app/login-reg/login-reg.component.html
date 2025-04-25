@@ -1,31 +1,30 @@
-
-<head>
-	<title>Slide Navbar</title>
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-</head>
-<body>
-	<div class="main">  	
-		<input type="checkbox" id="chk" aria-hidden="true">
-
-			<div class="signup">
-				<form>
-					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="User-Name" required="">
-					<input type="email" name="email" placeholder="Email" required="">
-          <input type="number" name="broj" placeholder="Telefon" required="">
-					<input type="password" name="pswd" placeholder="Passwort" required="">
-					<button>Sign up</button>
-				</form>
-			</div>
-
-			<div class="login">
-				<form>
-					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Passwort" required="">
-					<button>Login</button>
-				</form>
-			</div>
+<div class="main">
+	<div class="tab-switch">
+	  <button [class.active]="isLoginMode" (click)="toggleMode()">Login</button>
+	  <button [class.active]="!isLoginMode" (click)="toggleMode()">Sign Up</button>
 	</div>
-</body>
-
+  
+	<div class="form-wrapper">
+	  <ng-container *ngIf="isLoginMode">
+		<form @slideFadeHorizontal (ngSubmit)="doLogin()">
+		  <label>Login</label>
+		  <input type="email" name="email" placeholder="Email" [(ngModel)]="email" required>
+		  <input type="password" name="password" placeholder="Passwort" [(ngModel)]="password" required>
+		  <button type="submit">Login</button>
+		</form>
+	  </ng-container>
+  
+	  <ng-container *ngIf="!isLoginMode">
+		<form @slideFadeHorizontal (ngSubmit)="doRegister()">
+		  <label>Sign up</label>
+		  <input type="text" name="username" placeholder="User - Name" [(ngModel)]="username" required>
+		  <input type="email" name="email" placeholder="Email" [(ngModel)]="email" required>
+		  <input type="number" name="phone" placeholder="Telefon" [(ngModel)]="phone" required>
+		  <input type="password" name="password" placeholder="Passwort" [(ngModel)]="password" required>
+		  <button type="submit">Sign up</button>
+		</form>
+	  </ng-container>
+	</div>
+  </div>
+  
+  

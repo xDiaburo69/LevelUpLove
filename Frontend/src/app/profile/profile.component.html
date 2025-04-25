@@ -1,0 +1,133 @@
+
+<!-- Carousel -->
+<div class="gallery">
+  <div class="gallery-container">
+    <div
+      *ngFor="let img of visibleImages; let i = index"
+      class="gallery-item-wrapper"
+    >
+      <img
+        class="gallery-item"
+        [ngClass]="'gallery-item-' + (i + 1)"
+        [src]="img"
+        [alt]="'Bild ' + (i + 1)"
+      />
+      <button
+        *ngIf="editMode"
+        class="delete-button"
+        (click)="deleteImage(i)"
+      >
+        ✖
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="gallery-controls">
+    <button (click)="prevImage()" class="gallery-controls-previous"></button>
+    <button (click)="nextImage()" class="gallery-controls-next"></button>
+</div>
+  
+  <!-- Profilbereich -->
+<div class="profile-container">
+  <header class="profile-header">
+    <h1>✨ Dein Profil ✨</h1>
+  </header>
+
+  <section class="profile-content">
+    <div class="profile-details">
+      <h2>💖 Benutzername: {{ profile.username }}</h2>
+      <ul>
+        <li>
+          Geschlecht:
+          <select [(ngModel)]="profile.gender" class="dropdown" [disabled]="!editMode">
+            <option value="goblin">Goblin (Männlich)</option>
+            <option value="amazone">Amazone (Weiblich)</option>
+            <option value="regenwurm">Regenwurm (Divers)</option>
+          </select>
+        </li>
+        <li>
+          Wohnort:
+          <input *ngIf="editMode" [(ngModel)]="profile.location" />
+          <span *ngIf="!editMode">{{ profile.location }}</span>
+        </li>
+        <li>
+          Alter:
+          <input *ngIf="editMode" type="number" [(ngModel)]="profile.age" />
+          <span *ngIf="!editMode">{{ profile.age }}</span>
+        </li>
+        <li>
+          Biografie:
+          <textarea *ngIf="editMode" [(ngModel)]="profile.bio"></textarea>
+          <span *ngIf="!editMode">{{ profile.bio }}</span>
+        </li>
+        <li>
+          Musikgeschmack:
+          <input *ngIf="editMode" [(ngModel)]="profile.music" />
+          <span *ngIf="!editMode">{{ profile.music }}</span>
+        </li>
+        <li>
+          Persönlichkeit:
+          <select [(ngModel)]="profile.personality" class="dropdown" [disabled]="!editMode">
+            <option value="Ex">Extrovertiert</option>
+            <option value="IN">Introvertiert</option>
+          </select>
+        </li>
+        <li>
+          Größe:
+          <input *ngIf="editMode" [(ngModel)]="profile.height" />
+          <span *ngIf="!editMode">{{ profile.height }}</span>
+        </li>
+        <li>
+          Bildung:
+          <input *ngIf="editMode" [(ngModel)]="profile.education" />
+          <span *ngIf="!editMode">{{ profile.education }}</span>
+        </li>
+        <li>
+          Kinder:
+          <input *ngIf="editMode" [(ngModel)]="profile.kids" />
+          <span *ngIf="!editMode">{{ profile.kids }}</span>
+        </li>
+        <li>
+          Raucher:
+          <input *ngIf="editMode" [(ngModel)]="profile.smoker" />
+          <span *ngIf="!editMode">{{ profile.smoker }}</span>
+        </li>
+        <li>
+          Beruf:
+          <input *ngIf="editMode" [(ngModel)]="profile.job" />
+          <span *ngIf="!editMode">{{ profile.job }}</span>
+        </li>
+        <li>
+          Wohnsituation:
+          <select [(ngModel)]="profile.livingSituation" class="dropdown" [disabled]="!editMode">
+            <option value="alone">Alleine</option>
+            <option value="parents">Bei Mama und Papa</option>
+            <option value="bridge">Unter einer Brücke</option>
+          </select>
+        </li>
+      </ul>
+
+      <!-- Buttons -->
+      <button (click)="toggleEdit()" class="edit-button" *ngIf="!editMode">Bearbeiten</button>
+      <button (click)="saveProfile()" class="save-button" *ngIf="editMode">Speichern</button>
+
+      <!-- Modal -->
+      <div class="modal" [class.visible]="showModal">
+        <div class="modal-content">
+          <h2>Gespeichert!</h2>
+          <p>Deine Änderungen wurden erfolgreich übernommen.</p>
+          <button (click)="closeModal()" class="modal-close-button">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 📸 Bild-Upload -->
+    <div class="gallery-upload" *ngIf="editMode">
+      <div class="upload-wrapper">
+        <label for="imageUpload" class="upload-button">➕ Bild hinzufügen</label>
+        <input type="file" id="imageUpload" (change)="onImageUpload($event)" accept="image/*" hidden />
+      </div>
+    </div>
+  </section>
+</div>

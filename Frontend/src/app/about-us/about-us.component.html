@@ -1,27 +1,34 @@
+<!-- about-us.component.html -->
 <section class="about-us">
+  <div class="text-container">
     <div class="about-header">
       <h1>About Us</h1>
       <p>Wir sind das magische Team hinter LevelUpLove – nerdig, kreativ und voller Liebe fürs Detail.</p>
     </div>
-  
-    <div class="photo-section">
-      <div class="photo-card">
-        <img src="../../assets/images/jordan.jpeg" alt="Teammitglied 1">
-        <h3>Jordan Alias Diaburo</h3>
-        <p>BugHunter & DataDemon</p>
-      </div>
-      <div class="photo-card">
-        <img src="assets/images/team2.jpg" alt="Teammitglied 2">
-        <h3>Bonnie Alias Madame Parker</h3>
-        <p>RenderRogue & ViewEngine</p>
-      </div>
+  </div>
+
+  <div class="photo-section">
+    <div class="photo-card">
+      <img src="../../assets/images/jordan.jpeg" alt="Teammitglied 1">
+      <h3>Jordan Alias Diaburo</h3>
+      <p>BugHunter & DataDemon</p>
     </div>
-  
-    <div class="faq-section">
-      <div class="faq" *ngFor="let q of faqs">
-        <h4>{{ q.question }}</h4>
-        <p>{{ q.answer }}</p>
-      </div>
+    <div class="photo-card">
+      <img src="../../assets/images/Image (1).JPG" alt="Teammitglied 2">
+      <h3>Bonnie Alias Madame Parker</h3>
+      <p>RenderRogue & ViewEngine</p>
     </div>
-  </section>
-  
+  </div>
+
+  <div class="questions-container">
+    <div
+      class="faq-container"
+      *ngFor="let q of faqs; let i = index"
+      (click)="toggleFaq(i)"
+      [class.expanded]="q.expanded"
+    >
+      <h4>{{ q.question }}</h4>
+      <p *ngIf="q.expanded">{{ q.answer }}</p>
+    </div>
+  </div>
+</section>
