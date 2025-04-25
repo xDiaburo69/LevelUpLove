@@ -1,0 +1,53 @@
+<!-- messages.component.html -->
+<div class="notification" *ngIf="notification">
+    {{ notification }}
+  </div>
+  
+  <div class="chat-container">
+    <!-- Sidebar -->
+    <aside class="chat-slider" [class.closed]="!sidebarOpen">
+      <button
+        class="chat-toggle-button"
+        aria-label="Chats ein-/ausklappen"
+        (click)="toggleSidebar()"
+      >
+        {{ sidebarOpen ? '🗨️' : '➡️' }}
+      </button>
+      <h2>Alle Chats</h2>
+      <ul>
+        <li
+          class="chat-item"
+          *ngFor="let c of chats"
+          [class.active]="c === selectedChat"
+          (click)="selectChat(c)"
+        >
+          {{ c }}
+        </li>
+      </ul>
+    </aside>
+  
+    <!-- Aktueller Chat -->
+    <main class="current-chat">
+      <header class="chat-header">
+        <h2>{{ selectedChat }}</h2>
+      </header>
+      <section class="messages">
+        <div *ngFor="let msg of messages" class="message" [ngClass]="{
+          'hero': msg.startsWith(selectedChat.split(' ')[2] + ':'),
+          'user': msg.startsWith('Du:')
+        }">
+          {{ msg }}
+        </div>
+      </section>
+      <footer class="chat-footer">
+        <input
+          type="text"
+          placeholder="Nachricht schreiben..."
+          [(ngModel)]="messageInput"
+          (keydown.enter)="sendMessage()"
+        />
+        <button (click)="sendMessage()">Senden</button>
+      </footer>
+    </main>
+  </div>
+  

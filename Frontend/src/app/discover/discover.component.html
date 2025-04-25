@@ -1,0 +1,82 @@
+<!-- discover.component.html -->
+<header>
+    <h1>LevelUpLove</h1>
+    <p>Liebe im Pixel-Universum ✨</p>
+  </header>
+  
+  <div class="stars"></div>
+  
+  <div class="intro">
+    <div class="crawl">
+      <p>In einer weit, weit entfernten Galaxie... wo Liebe auf Level 99 wartet... beginnt dein Abenteuer mit Nerd Date.</p>
+    </div>
+  </div>
+  
+  <section class="features">
+    <div class="feature">
+      <img src="https://cdn-icons-png.flaticon.com/512/3829/3829986.png" alt="Player 2 Icon">
+      <h2>💾 Suche nach deinem Player 2</h2>
+      <p>Begib dich auf ein episches Abenteuer durchs Dating-Multiversum – ob für Dungeon-Raids oder Mario Kart-Turniere!</p>
+    </div>
+    <div class="feature">
+      <img src="../../assets/images/space.png" alt="Profile Icon">
+      <h2>👾 Nerdige Profile entdecken</h2>
+      <p>Filtern nach Lieblings-Universen, Lieblingscharakteren und Nerd-Level. Swipe durch Cosplayer, Coder & Comic-Fans!</p>
+    </div>
+    <div class="feature">
+      <img src="https://cdn-icons-png.flaticon.com/512/4700/4700579.png" alt="Chat Icon">
+      <h2>🚀 Chat in Lichtgeschwindigkeit</h2>
+      <p>Chatte wie auf der Enterprise – schnell, sicher und mit genügend Platz für deine liebsten Emoji-Zauber!</p>
+    </div>
+    <div class="feature">
+      <img src="https://cdn-icons-png.flaticon.com/512/3657/3657551.png" alt="Event Icon">
+      <h2>🪐 Events aus einer anderen Galaxie</h2>
+      <p>Triff Gleichgesinnte bei Cosplay-Contests, VR-Treffen oder auf der Retro-Gaming-Convention deines Herzens.</p>
+    </div>
+  </section>
+  
+  <div class="chat-preview">
+    <div id="chat-box" class="chat-box"></div>
+  </div>
+  
+  <section class="quiz-section">
+    <h2>🧙‍♂️ Magisches Quiz</h2>
+    <form id="quiz-form">
+      <fieldset>
+        <legend>Frage 1: Was würdest du am liebsten tun?</legend>
+        <label><input type="radio" name="question1" value="Gryffindor"> Mutig ein Abenteuer bestehen</label>
+        <label><input type="radio" name="question1" value="Ravenclaw"> Ein neues Rätsel lösen</label>
+        <label><input type="radio" name="question1" value="Hufflepuff"> Jemandem in Not helfen</label>
+        <label><input type="radio" name="question1" value="Slytherin"> Ein großes Ziel erreichen</label>
+      </fieldset>
+  
+      <fieldset>
+        <legend>Frage 2: Was beschreibt dich am besten?</legend>
+        <label><input type="radio" name="question2" value="Hobbit"> Gemütlich und naturverbunden</label>
+        <label><input type="radio" name="question2" value="Elf"> Anmutig und weise</label>
+        <label><input type="radio" name="question2" value="Zwerg"> Tapfer und zäh</label>
+        <label><input type="radio" name="question2" value="Mensch"> Ehrgeizig und vielseitig</label>
+      </fieldset>
+  
+      <fieldset>
+        <legend>Frage 3: Welche Farbe spricht dich an?</legend>
+        <label><input type="radio" name="question3" value="Gryffindor"> Rot</label>
+        <label><input type="radio" name="question3" value="Ravenclaw"> Blau</label>
+        <label><input type="radio" name="question3" value="Hufflepuff"> Gelb</label>
+        <label><input type="radio" name="question3" value="Slytherin"> Grün</label>
+      </fieldset>
+  
+      <fieldset>
+        <legend>Frage 4: Was ist dir besonders wichtig?</legend>
+        <label><input type="radio" name="question4" value="Hobbit"> Ein friedliches Leben</label>
+        <label><input type="radio" name="question4" value="Elf"> Kunst und Schönheit</label>
+        <label><input type="radio" name="question4" value="Zwerg"> Macht und Ehre</label>
+        <label><input type="radio" name="question4" value="Mensch"> Freiheit und Abenteuer</label>
+      </fieldset>
+  
+      <button type="button" (click)="submitQuiz()">Quiz abschließen</button>
+    </form>
+    <div id="quiz-result" [innerHTML]="quizResult"></div>
+  </section>
+  
+  <footer>© 2025 LevelUpLove. Möge die Liebe mit dir sein.</footer>

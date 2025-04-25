@@ -4,10 +4,13 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { HeaderComponent } from './header/header.component';
 import { GrettingstextComponent } from './grettingstext/grettingstext.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { DiscoverComponent } from './discover/discover.component';
+import { ProfileComponent } from './profile/profile.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,HeaderComponent,NavigationComponent,GrettingstextComponent,AboutUsComponent],
+  imports: [RouterOutlet,HeaderComponent,NavigationComponent,GrettingstextComponent,AboutUsComponent,DiscoverComponent,ProfileComponent,MessagesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

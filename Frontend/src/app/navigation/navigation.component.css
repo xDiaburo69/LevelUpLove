@@ -3,12 +3,47 @@
   top: 0; /* Bleibt oben kleben */
   width: 100%; /* Volle Breite */
   z-index: 1000; /* Damit sie über anderen Elementen bleibt */
-  background: rgba(107, 39, 107, 0.486); /* Lila mit Transparenz */
+  background: rgba(110, 19, 110, 0.753); /* Lila mit Transparenz */
   backdrop-filter: blur(2px); /* Schöner Unschärfe-Effekt */
   transition: background 2s ease-in-out;
  
 }
 
+
+.nav-link {
+  color: #ffedff !important; /* Schriftfarbe */
+  font-size: 1.2rem; /* Schriftgröße */
+  text-shadow: 2px 2px 5px #05010180; /* Schatten für den Text */
+  transition: color 0.5s ease-in-out; /* Übergangseffekt für die Farbe */
+}
+.centered-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight:normal;
+    color: #ffe6ff;
+    margin: 0 auto;
+    text-align: center;
+    text-shadow: 2px 2px 8px #00000070;
+    gap: 0.5rem;
+}
+
+.brand-text {
+    font-family: 'Jost', sans-serif;
+  }
+  
+.sparkle-heart {
+    animation: sparkle 1.5s infinite alternate;
+    display: inline-block;
+  }
+  
+@keyframes sparkle {
+    0%   { opacity: 0.2; transform: scale(1) rotate(0deg); }
+    50%  { opacity: 1;   transform: scale(1.2) rotate(10deg); }
+    100% { opacity: 0.5; transform: scale(1) rotate(-10deg); }
+  }
+  
 .container-fluid{
   margin: 0;
   padding: 0;

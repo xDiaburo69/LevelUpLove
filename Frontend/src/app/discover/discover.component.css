@@ -1,0 +1,223 @@
+:host {
+    display: block;
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+    background: radial-gradient(circle at center, #0a0014, #000);
+    color: white;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+  
+  /* Sterne-Hintergrund */
+.stars {
+    background-image: url('../../assets/images/background-discover.png');
+    background-size: cover;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.3;
+}
+  
+  /* Intro-Crawl */
+.intro {
+    height: 50vh;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    padding-top: 60px; /* Platz für Navbar */
+}
+.crawl {
+    font-size: 1rem;
+    width: 60%;
+    text-align: center;
+    color: #ffe6ff;
+    transform: rotateX(20deg);
+    animation: crawl 30s linear infinite;
+}
+@keyframes crawl {
+    0%   { transform: translateY(100%) rotateX(20deg); }
+    100% { transform: translateY(-200%) rotateX(20deg); }
+}
+  
+  /* Header-Animation */
+header {
+    text-align: center;
+    padding: 4rem 1rem;
+    color: #c799ff;
+    animation: pulseText 3s infinite;
+}
+@keyframes pulseText {
+    0%, 100% { text-shadow: 0 0 10px #9d7dff; }
+    50%      { text-shadow: 0 0 30px #ffe6ff; }
+}
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+  header p {
+    font-size: 1rem;
+    color: #ffe6ff;
+}
+  
+  /* Feature-Grid */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+    z-index: 2;
+    position: relative;
+ }
+.feature {
+    background: rgba(10, 0, 40, 0.6);
+    padding: 2rem;
+    border-radius: 1.5rem;
+    border: 1px solid #a57cff;
+    box-shadow: 0 0 30px rgba(164, 115, 255, 0.2);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    backdrop-filter: blur(4px);
+    text-align: center;
+
+}
+.feature:hover {
+    transform: scale(1.08) rotate(1deg);
+    box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+}
+.feature img {
+    width: 80px;
+    margin-bottom: 1rem;
+    animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-10px); }
+}
+.feature h2 {
+    font-size: 0.7rem;
+    margin-bottom: 1rem;
+    color: #b281ff;
+}
+.feature p {
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: #e8d9ff;
+}
+  
+  /* Intersection-Observer–Styles */
+.invisible {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.6s ease-out;
+}
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+  
+  /* Chat-Vorschau */
+.chat-preview {
+    padding: 2rem;
+    background: rgba(0, 0, 20, 0.664);
+    color: #f0e6ff !important;
+    text-align: center;
+    margin: 2rem auto;
+    border-radius: 1.5rem;
+    width: 90%;
+    max-width: 800px;
+    border: 1px solid #b781ff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+    opacity: 1;
+    position: relative;
+  }
+.chat-box {
+    background: rgba(20, 10, 40, 0.5);
+    padding: 1rem;
+    border-radius: 1rem;
+    text-align: left;
+    margin-top: 1rem;
+    font-family: monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #ffccff;
+    min-height: 150px;
+    
+  }
+  .chat-box p {
+    margin: 0.5rem 0;
+    opacity: 1;
+  }
+  
+
+  /* Quiz-Sektion */
+.quiz-section {
+padding: 2rem;
+background: rgba(40, 20, 60, 0.6);
+color: #f0e6ff;
+text-align: center;
+margin: 2rem auto;
+border-radius: 1.5rem;
+width: 90%;
+max-width: 800px;
+border: 1px solid #b781ff;
+box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+z-index: 10;
+position: relative;
+}
+#quiz-form {
+text-align: left;
+margin: auto;
+width: 80%;
+max-width: 600px;
+}
+fieldset {
+border: 1px solid #b781ff;
+border-radius: 10px;
+padding: 1rem;
+margin-bottom: 1.5rem;
+}
+legend {
+font-size: 1.2rem;
+color: #ffe6ff;
+}
+label {
+display: block;
+margin: 0.5rem 0;
+font-size: 0.9rem;
+color: #e8d9ff;
+}
+button {
+background: #a57cff;
+color: white;
+font-size: 1rem;
+border: none;
+border-radius: 10px;
+padding: 0.5rem 1rem;
+cursor: pointer;
+transition: background 0.3s ease;
+}
+button:hover {
+    background: #9d7dff;
+}
+#quiz-result {
+margin-top: 2rem;
+font-size: 1.2rem;
+color: #ffe6ff;
+}
+  
+  /* Footer innerhalb der Komponente */
+footer {
+text-align: center;
+padding: 2rem;
+font-size: 0.8rem;
+color: #aaaaff;
+}
