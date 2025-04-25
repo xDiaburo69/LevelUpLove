@@ -28,9 +28,11 @@ export class ProfileComponent implements AfterViewInit {
 
   profile = {
     username: 'Abenteurer123',
+    name: 'Max Mustermann',
     gender: 'goblin',
     location: 'Berlin',
     age: 28,
+    birthdate: new Date('1995-05-15'),
     bio: 'Liebe Abenteuer und Magie!',
     music: 'Rock, Klassik',
     personality: 'Ex',
@@ -38,8 +40,12 @@ export class ProfileComponent implements AfterViewInit {
     education: 'Master in Informatik',
     kids: 'Keine',
     smoker: 'Nein',
+    alcohol: 'Ja',
+    pets: 'Hunde',
+    hobbies: 'Gaming, Reisen',
     job: 'Softwareentwickler',
     livingSituation: 'alone'
+    
   };
 
   editMode = false;

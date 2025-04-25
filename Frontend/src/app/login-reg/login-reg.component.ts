@@ -40,6 +40,8 @@ export class LoginRegComponent implements OnInit {
   password = '';
   username = '';
   phone = '';
+  birthdate = '';
+
 
   constructor(private auth: AuthService, private router: Router) {}
 
