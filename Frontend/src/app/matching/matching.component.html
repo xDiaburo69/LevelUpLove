@@ -1,0 +1,23 @@
+<div class="match-container">
+    <div #card class="profile-card" (mousedown)="onMouseDown($event)">
+      <img [src]="current.img" alt="Profilbild">
+      <h2>{{ current.name }}</h2>
+      <p>Typ: {{ current.type }}<br>Lieblingsort: {{ current.location }}</p>
+    </div>
+  
+    <div class="buttons">
+      <button (click)="dislike()">❌</button>
+      <button (click)="like()">❤️</button>
+    </div>
+  
+    <div #levelUp class="level-up hidden">
+      🎉 LEVEL UP! 🎉
+    </div>
+  
+    <div #sadFace class="sad-face hidden">
+      😢
+    </div>
+  
+    <div #particles id="particles"></div>
+  </div>
+  
