@@ -7,10 +7,11 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { DiscoverComponent } from './discover/discover.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MessagesComponent } from './messages/messages.component';
+import { MatchingComponent } from './matching/matching.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,HeaderComponent,NavigationComponent,GrettingstextComponent,AboutUsComponent,DiscoverComponent,ProfileComponent,MessagesComponent],
+  imports: [RouterOutlet,HeaderComponent,NavigationComponent,GrettingstextComponent,AboutUsComponent,DiscoverComponent,ProfileComponent,MessagesComponent,MatchingComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -7,6 +7,7 @@ import { DiscoverComponent } from './discover/discover.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AuthGuard } from './auth/auth.guard';
 import { LoginRegComponent } from './login-reg/login-reg.component';
+import { MatchingComponent } from './matching/matching.component';
 
 export const routes: Routes = [
   // öffentlich (nicht eingeloggt)
@@ -18,6 +19,7 @@ export const routes: Routes = [
   // geschützte Bereiche (nur eingeloggt)
   { path: 'profile',   component: ProfileComponent,  canActivate: [AuthGuard] },
   { path: 'discover',  component: DiscoverComponent , canActivate: [AuthGuard] },
+  {path: 'matching', component: MatchingComponent, canActivate: [AuthGuard]},
   { path: 'messages',  component: MessagesComponent , canActivate: [AuthGuard] },
 
   // Fallback
